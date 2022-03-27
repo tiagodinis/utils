@@ -1,0 +1,23 @@
+{
+  "name": "@tiagodinis/utils",
+  "version": "1.0.1",
+  "description": "tiagodinis's utils",
+  "main": "index.js",
+  "license": "MIT",
+  "author": {
+    "name": "tiagodinis",
+    "url": "https://tiagodinis.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tiagodinis/utils.git"
+  },
+  "keywords": [
+    "math",
+    "random"
+  ],
+  "homepage": "https://github.com/tiagodinis/utils",
+  "bugs": {
+    "url": "https://github.com/tiagodinis/utils/issues"
+  }
+}
