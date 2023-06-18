@@ -1,6 +1,6 @@
 // -- Types ---------------------------------------------------------
 
-type AnyFunc = (...args: any[]) => any;
+export type AnyFunc = (...args: any[]) => any;
 export type Assertion<T0 extends any[], T1> = {
   description: string;
   input: [...T0];

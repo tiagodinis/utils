@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "preserve",
     "module": "ESNext",
     "target": "ESNext",
     "declaration": true,
