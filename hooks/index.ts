@@ -1,1 +1,1 @@
-export * from "./useOnResize";
+export * from "./useCallOnEvent";

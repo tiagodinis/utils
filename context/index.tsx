@@ -7,6 +7,9 @@ import {
   JSX,
   Dispatch,
   SetStateAction,
+  ReactElement,
+  cloneElement,
+  Children,
 } from "react";
 
 type Reducer<S, A> = (state: S, action: A) => S;
@@ -17,7 +20,7 @@ type GenerateContextProps<S, A> = [
   ({ children }: { children: ReactNode }) => JSX.Element
 ];
 
-function validateConsumer(consumer: any) {
+function validateConsumer<T>(consumer: T | null) {
   if (consumer === null) {
     throw new Error("consumer must be used within a StoreProvider");
   }
@@ -47,4 +50,20 @@ export default function generateContext<S, A>(
       );
     },
   ];
+}
+
+export function PartialContextMemoizer<T extends Partial<any>>({
+  children,
+  partialContext,
+}: {
+  children: ReactElement;
+  partialContext: () => T;
+}) {
+  const partialContextProps = partialContext();
+
+  const modifiedChildren = Children.map(children, (child: ReactElement) => {
+    return cloneElement(child, partialContextProps);
+  });
+
+  return <>{modifiedChildren}</>;
 }
