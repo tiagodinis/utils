@@ -52,17 +52,17 @@ export default function generateContext<S, A>(
   ];
 }
 
-export function PartialContextMemoizer<T extends Partial<any>>({
+export function ContextSliceWrapper<T extends Partial<any>>({
   children,
-  partialContext,
+  contextSlice,
 }: {
   children: ReactElement;
-  partialContext: () => T;
+  contextSlice: () => T;
 }) {
-  const partialContextProps = partialContext();
+  const contextSliceProps = contextSlice();
 
   const modifiedChildren = Children.map(children, (child: ReactElement) => {
-    return cloneElement(child, partialContextProps);
+    return cloneElement(child, contextSliceProps);
   });
 
   return <>{modifiedChildren}</>;
