@@ -1,3 +1,10 @@
+export const flex = ({ direction, align, justify } = {}) => `
+  display: flex;
+  flex-direction: ${direction || 'row'};
+  justify-content: ${justify || 'space-between'};
+  align-items: ${align || 'center'};
+`;
+
 export const scrimGradient = (
   red,
   green,
@@ -44,11 +51,7 @@ export function getPoints(numDivisions, easingFunction, start = 0, end = 1) {
 //   return `${res})`;
 // }
 
-export const flexSpread = (alignment = "space-between") => `
-  display: flex;
-  justify-content: ${alignment};
-  align-items: center;
-`;
+
 
 
 // ----------------------------------------------------------------------------

@@ -8,6 +8,19 @@ export function lerp(percentage: number, start: number, end: number) {
   return start + (end - start) * clamp(percentage, 0, 1);
 }
 
+export function transform(
+  value: number,
+  oldRange: [number, number],
+  newRange: [number, number]
+) {
+  const [oldMin, oldMax] = oldRange;
+  const [newMin, newMax] = newRange;
+
+  const percentage = clamp((value - oldMin) / (oldMax - oldMin), 0, 1);
+
+  return newMin + (newMax - newMin) * percentage;
+}
+
 // Ease generalization (https://arxiv.org/abs/2010.09714)
 // Visualization: https://www.desmos.com/calculator/t9uwpot2of?lang=en-US
 export function ease(

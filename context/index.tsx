@@ -7,9 +7,6 @@ import {
   JSX,
   Dispatch,
   SetStateAction,
-  ReactElement,
-  cloneElement,
-  Children,
 } from "react";
 
 type Reducer<S, A> = (state: S, action: A) => S;
@@ -52,18 +49,13 @@ export default function generateContext<S, A>(
   ];
 }
 
-export function ContextSliceWrapper<T extends Partial<any>>({
-  children,
-  contextSlice,
-}: {
-  children: ReactElement;
-  contextSlice: () => T;
-}) {
-  const contextSliceProps = contextSlice();
+export const filterContext = (
+  Component: React.ComponentType,
+  getContext: () => any,
+  key: string
+) =>
+  function FilterContextWrapper(props: any) {
+    const prop = { [key]: getContext()[key] };
 
-  const modifiedChildren = Children.map(children, (child: ReactElement) => {
-    return cloneElement(child, contextSliceProps);
-  });
-
-  return <>{modifiedChildren}</>;
-}
+    return <Component {...props} {...prop} />;
+  };
