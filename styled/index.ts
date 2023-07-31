@@ -1,14 +1,22 @@
-export const flex = ({ direction, align, justify } = {}) => `
+type FlexProps = {
+  direction?: 'row' | 'column';
+  align?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
+  justify?: 'flex-start' | 'flex-end' | 'center' | 'space-between' | 'space-around' | 'space-evenly';
+}
+
+export const flex = ({ direction, align, justify }: FlexProps = {}) => `
   display: flex;
   flex-direction: ${direction || 'row'};
   justify-content: ${justify || 'space-between'};
   align-items: ${align || 'center'};
 `;
 
+export const shift = (x = 0, y = 0) => `translate: ${x}px ${y}px`;
+
 export const scrimGradient = (
-  red,
-  green,
-  blue,
+  red = 0,
+  green = 0,
+  blue = 0,
   angle = 180
 ) => `linear-gradient(
     ${angle}deg,
@@ -27,18 +35,18 @@ export const scrimGradient = (
     transparent 100%
   )`;
 
-export function getPoints(numDivisions, easingFunction, start = 0, end = 1) {
-  if (numDivisions < 1) {
-    throw new Error("Number of divisions must be at least 1.");
-  }
+// export function getPoints(numDivisions, easingFunction, start = 0, end = 1) {
+//   if (numDivisions < 1) {
+//     throw new Error("Number of divisions must be at least 1.");
+//   }
 
-  const increment = (end - start) / (numDivisions + 1);
-  const points = Array.from({ length: numDivisions + 1 }, (_, i) =>
-    easingFunction(i * increment + start)
-  );
+//   const increment = (end - start) / (numDivisions + 1);
+//   const points = Array.from({ length: numDivisions + 1 }, (_, i) =>
+//     easingFunction(i * increment + start)
+//   );
 
-  return [...points, end];
-}
+//   return [...points, end];
+// }
 
 // export function customGradient(angle, red, green, blue, points) {
 //   let res = `linear-gradient(${angle}deg`;
@@ -75,38 +83,31 @@ export function getPoints(numDivisions, easingFunction, start = 0, end = 1) {
 //   ${property}: ${clampedLerp(min, max, ...ranges.mobile, 'px')};
 // `;
 
-// TODO: make version with translate instead
-export const relativeShift = (topOffset, leftOffset) => `
-  position: relative;
-  top: ${topOffset ?? 0};
-  left: ${leftOffset ?? 0};
-`;
+// export const centeringAbsolute = (position) => `
+//   position: ${position};
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+// `;
 
-export const centeringAbsolute = (position) => `
-  position: ${position};
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`;
+// export const centeringFlex = `
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
-export const centeringFlex = `
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// export const stackingGrid = `
+//   display: grid;
+//   grid-template-columns: 1fr;
+//   grid-template-rows: 1fr;
 
-export const stackingGrid = `
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr;
+//   & > div {
+//     grid-area: 1 / 1 / 2 / 2;
+//   }
+// `;
 
-  & > div {
-    grid-area: 1 / 1 / 2 / 2;
-  }
-`;
-
-export const evenGrid = (rows, cols) => `
-  display: grid;
-  grid-template-columns: repeat(${cols}, 1fr);
-  grid-template-rows: repeat(${rows}, 1fr);
-`;
+// export const evenGrid = (rows, cols) => `
+//   display: grid;
+//   grid-template-columns: repeat(${cols}, 1fr);
+//   grid-template-rows: repeat(${rows}, 1fr);
+// `;

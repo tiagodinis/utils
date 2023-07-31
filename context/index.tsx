@@ -25,7 +25,7 @@ function validateConsumer<T>(consumer: T | null) {
   return consumer;
 }
 
-export default function generateContext<S, A>(
+export function generateContext<S, A>(
   initialData: S,
   reducer?: Reducer<S, A>
 ): GenerateContextProps<S, A> {
